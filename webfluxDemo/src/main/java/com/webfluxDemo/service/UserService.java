@@ -20,7 +20,7 @@ public class UserService {
 	private UserRepository userRepository;
 
 	public Mono<User> getUserById(Long id) {
-		return this.getUserById(id);
+		return this.userRepository.getUserById(id);
 	}
 
 	public Mono<User> saveUser(User user) {
