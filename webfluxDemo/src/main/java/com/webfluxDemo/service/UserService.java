@@ -9,10 +9,6 @@ import com.webfluxDemo.repository.UserRepository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-/**
- * @author 高坂穗乃果
- *
- */
 @Service
 public class UserService {
 

@@ -18,7 +18,10 @@ public class UserRepository {
 	private static Map<Long, User> userMap = new ConcurrentHashMap<>();
 
 	public Mono<User> getUserById(Long id) {
-		return Mono.just(userMap.get(id));
+		if(userMap.containsKey(id)) {
+			return Mono.just(userMap.get(id));
+		}
+		return Mono.empty();
 	}
 
 	public Mono<User> saveUser(User user) {
@@ -27,12 +30,14 @@ public class UserRepository {
 	}
 
 	public Flux<User> getAllUsers() {
-		User user = new User();
-		user.setId(Long.valueOf(1));
-		user.setName("1");
-		user.setPeople(true);
-		user.setDatetime(Timestamp.valueOf(LocalDateTime.now()));
-		userMap.put(user.getId(), user);
+		if(userMap.isEmpty()) {
+			User user = new User();
+			user.setId(Long.valueOf(1));
+			user.setName("1");
+			user.setPeople(true);
+			user.setDatetime(Timestamp.valueOf(LocalDateTime.now()));
+			userMap.put(user.getId(), user);
+		}
 		return Flux.fromIterable(userMap.values());
 	}
 

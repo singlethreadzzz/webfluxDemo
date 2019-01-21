@@ -18,19 +18,25 @@ public class DemoHandler {
 	private UserService userService;
 
 	public Mono<ServerResponse> getAllUsers(ServerRequest serverRequest) {
-		return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON_UTF8).body(this.userService.getAllUsers(),
-				User.class);
+		return ServerResponse
+				.ok()
+				.contentType(MediaType.APPLICATION_JSON_UTF8)
+				.body(this.userService.getAllUsers(), User.class);
 	}
 
 	public Mono<ServerResponse> saveUser(ServerRequest serverRequest) {
-		return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON_UTF8).body(this.userService.getAllUsers(),
-				User.class);
+//		this.userService.saveUser(user);
+		return ServerResponse
+				.ok()
+				.contentType(MediaType.APPLICATION_JSON_UTF8)
+				.body(Mono.just("保存成功"), String.class);
 	}
 
-//	public Mono<ServerResponse> getUserById(ServerRequest serverRequest) {
-//		return ServerResponse
-//				.ok()
-//				.body(serverRequest.queryParam("id"), User.class);
-//	}
+	public Mono<ServerResponse> getUserById(ServerRequest serverRequest) {
+		return ServerResponse
+				.ok()
+				.contentType(MediaType.APPLICATION_JSON_UTF8)
+				.body(this.userService.getUserById(Long.valueOf(serverRequest.pathVariable("id"))), User.class);
+	}
 
 }

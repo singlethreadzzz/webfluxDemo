@@ -19,9 +19,14 @@ public class DemoRoute {
 
 	@Bean
 	public RouterFunction<ServerResponse> userRoute() {
-		return RouterFunctions.route(RequestPredicates.GET("/getAllUsers"), demoHandler::getAllUsers).andRoute(
-				RequestPredicates.POST("/saveUser").and(RequestPredicates.accept(MediaType.APPLICATION_JSON_UTF8)),
-				demoHandler::saveUser);
+		return RouterFunctions
+				.route(RequestPredicates.GET("/getAllUsers"), demoHandler::getAllUsers)
+				.andRoute(RequestPredicates
+						.POST("/saveUser")
+						.and(RequestPredicates
+								.accept(MediaType.APPLICATION_JSON_UTF8)),
+				demoHandler::saveUser)
+				.andRoute(RequestPredicates.GET("/getUserById/{id}"), demoHandler::getUserById);
 	}
 
 }
