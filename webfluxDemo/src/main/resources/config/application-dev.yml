@@ -1,0 +1,14 @@
+server:
+  port: 8080
+logging:
+  level: 
+    com.singlethreadzzz.webfluxDemo: info
+  file: logs/dim.log
+spring:
+  resources:
+    static-locations: classpath:/static/
+    cache:      period: 0
+  mvc:
+    static-path-pattern: /static/**
+  banner:
+    location: classpath:/static/banner/banner.txt
